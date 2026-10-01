@@ -1,0 +1,1 @@
+export default function Profile() { return <><h1 className="text-3xl font-bold">Your profile</h1><div className="mt-6 rounded-xl bg-white p-6 shadow-sm text-slate-600">Profile details, skills, and portfolio fields arrive with the user model.</div></>; }

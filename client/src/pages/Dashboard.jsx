@@ -1,0 +1,1 @@
+export default function Dashboard() { return <><p className="font-semibold text-indigo-600">Dashboard</p><h1 className="mt-1 text-3xl font-bold">Your workspace</h1><div className="mt-6 rounded-xl bg-white p-6 shadow-sm"><p className="text-slate-600">Your tasks, applications, payments, and workshops will appear here as the next phases are added.</p></div></>; }

@@ -1,0 +1,6 @@
+import { Link } from 'react-router-dom';
+
+export default function TaskCard({ task }) {
+  const budget = task.budget?.min !== undefined || task.budget?.max !== undefined ? `₹${task.budget.min ?? 0}${task.budget.max ? ` – ₹${task.budget.max}` : '+'}` : 'Budget to discuss';
+  return <article className="rounded-xl bg-white p-5 shadow-sm ring-1 ring-slate-200"><div className="flex items-start justify-between gap-3"><p className="rounded-full bg-indigo-50 px-3 py-1 text-xs font-semibold text-indigo-700">{task.category}</p><p className="text-sm text-slate-500">{task.workMode}</p></div><h2 className="mt-4 text-lg font-bold text-slate-950"><Link className="hover:text-indigo-600" to={`/tasks/${task._id}`}>{task.title}</Link></h2><p className="mt-2 line-clamp-2 text-sm text-slate-600">{task.description}</p><div className="mt-4 flex items-center justify-between text-sm"><span className="font-semibold text-slate-900">{budget}</span><span className="text-slate-500">{task.location?.city || 'Remote'}</span></div><div className="mt-4 flex flex-wrap gap-2">{task.requiredSkills?.slice(0, 4).map((skill) => <span key={skill} className="rounded bg-slate-100 px-2 py-1 text-xs text-slate-600">{skill}</span>)}</div></article>;
+}

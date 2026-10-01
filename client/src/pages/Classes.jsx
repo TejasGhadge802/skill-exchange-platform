@@ -1,0 +1,9 @@
+import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import api from '../services/api';
+
+export default function Classes() {
+  const [classes, setClasses] = useState([]); const [error, setError] = useState('');
+  useEffect(() => { api.get('/classes').then(({ data }) => setClasses(data.data.classes)).catch((requestError) => setError(requestError.response?.data?.message || 'Unable to load classes.')); }, []);
+  return <section className="mx-auto max-w-6xl px-4 py-12"><div className="flex flex-wrap items-end justify-between gap-4"><div><h1 className="text-3xl font-bold">Classes & workshops</h1><p className="mt-2 text-slate-600">Learn from skilled instructors or share what you know.</p></div><Link className="rounded-lg bg-indigo-600 px-4 py-2 font-semibold text-white" to="/classes/new">Create a class</Link></div>{error && <p className="mt-6 text-red-700">{error}</p>}<div className="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-3">{classes.map((workshop) => <article key={workshop._id} className="rounded-xl bg-white p-5 shadow-sm"><p className="text-sm font-semibold text-indigo-600">{workshop.category}</p><h2 className="mt-2 text-xl font-bold">{workshop.title}</h2><p className="mt-2 line-clamp-3 text-sm text-slate-600">{workshop.description}</p><p className="mt-4 text-sm"><strong>{new Date(workshop.date).toLocaleDateString()}</strong> · {workshop.startTime}</p><p className="mt-1 text-sm">{workshop.price ? `₹${workshop.price}` : 'Free'} · {workshop.enrolledCount}/{workshop.capacity} enrolled</p><Link className="mt-4 inline-block font-semibold text-indigo-600" to={`/classes/${workshop._id}`}>View class →</Link></article>)}{!classes.length && !error && <p className="col-span-full rounded-xl border border-dashed border-slate-300 p-10 text-center text-slate-600">No approved classes are available yet.</p>}</div></section>;
+}

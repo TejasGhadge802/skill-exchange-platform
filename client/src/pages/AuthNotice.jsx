@@ -1,0 +1,1 @@
+export default function AuthNotice() { return <p className="mb-5 rounded-lg border border-amber-200 bg-amber-50 p-3 text-sm text-amber-800">Add Firebase values to <code>client/.env</code> to enable authentication.</p>; }
